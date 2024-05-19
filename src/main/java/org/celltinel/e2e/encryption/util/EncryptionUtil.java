@@ -8,6 +8,8 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.celltinel.e2e.encryption.common.error.ServiceException;
@@ -38,10 +40,23 @@ public class EncryptionUtil {
     }
 
     @SneakyThrows
-    public static String decryptWithPrivateKey(String encryptedMessage, String privateKey) {
+    public static byte[] decryptWithPrivateKey(String encryptedMessage, String privateKey) {
         try {
             Cipher decryptCipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             decryptCipher.init(Cipher.DECRYPT_MODE, EncryptionUtil.getPrivateKey(privateKey));
+            byte[] encryptedMsg = Base64.getDecoder().decode(encryptedMessage);
+            return decryptCipher.doFinal(encryptedMsg);
+        } catch (Exception ex) {
+            log.error("Failed to decrypt message, {}", ex.getMessage());
+            throw new ServiceException(ErrorCodes.INVALID_MESSAGE.name(), "Invalid message body");
+        }
+    }
+
+    @SneakyThrows
+    public static String decryptWithAES(String encryptedMessage, byte[] key) {
+        try {
+            Cipher decryptCipher = Cipher.getInstance("AES");
+            decryptCipher.init(Cipher.DECRYPT_MODE, EncryptionUtil.getAESKey(key));
             byte[] encryptedMsg = Base64.getDecoder().decode(encryptedMessage);
             byte[] decryptedMsg = decryptCipher.doFinal(encryptedMsg);
             return new String(decryptedMsg, StandardCharsets.UTF_8);
@@ -49,6 +64,10 @@ public class EncryptionUtil {
             log.error("Failed to decrypt message, {}", ex.getMessage());
             throw new ServiceException(ErrorCodes.INVALID_MESSAGE.name(), "Invalid message body");
         }
+    }
+
+    private static SecretKey getAESKey(byte[] key) {
+        return new SecretKeySpec(key, "AES");
     }
 
     private static PrivateKey getPrivateKey(String privateKey) {

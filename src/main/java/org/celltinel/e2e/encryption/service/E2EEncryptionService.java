@@ -41,9 +41,11 @@ public class E2EEncryptionService {
     }
 
     public CryptoConversionResponse decryptMessage(DecryptMessageRequest request) {
+        byte[] aesKey = EncryptionUtil.decryptWithPrivateKey(
+                request.getAesKey(), securityProperties.getPrivateKey());
+        System.out.println(aesKey);
         return new CryptoConversionResponse(
-                EncryptionUtil.decryptWithPrivateKey(
-                        request.getMessageBody(), securityProperties.getPrivateKey()));
+                EncryptionUtil.decryptWithAES(request.getMessageBody(), aesKey));
     }
 
 }

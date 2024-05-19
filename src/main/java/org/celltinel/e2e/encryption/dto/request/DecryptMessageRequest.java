@@ -6,5 +6,6 @@ import lombok.Data;
 public class DecryptMessageRequest {
 
     private String messageBody;
+    private String aesKey;
 
 }
