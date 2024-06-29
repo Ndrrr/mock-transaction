@@ -26,12 +26,10 @@
         </encoder>
     </appender>
 
-    <springProfile name="local">
-        <logger name="org.celltinel.e2e.encryption" level="DEBUG"/>
-        <root level="WARN">
-            <appender-ref ref="CONSOLE"/>
-        </root>
-    </springProfile>
+    <logger name="org.celltinel.e2e.encryption" level="DEBUG"/>
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
 
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
 

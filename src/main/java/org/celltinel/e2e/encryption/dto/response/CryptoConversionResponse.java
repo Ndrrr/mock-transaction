@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CryptoConversionResponse {
 
-    private String encryptedMessage;
+    private String message;
 
 }
