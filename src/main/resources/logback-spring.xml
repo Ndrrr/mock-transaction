@@ -26,7 +26,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.celltinel.e2e.encryption" level="DEBUG"/>
+    <logger name="org.untitled.e2e.encryption" level="DEBUG"/>
     <root level="WARN">
         <appender-ref ref="CONSOLE"/>
     </root>

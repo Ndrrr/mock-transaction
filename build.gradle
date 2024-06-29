@@ -30,11 +30,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation "org.apache.commons:commons-lang3:${apacheCommonsLang3Version}"
     implementation "net.logstash.logback:logstash-logback-encoder:${logstashLogbackEncoderVersion}"
     implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
     implementation "org.hibernate.validator:hibernate-validator:${validationVersion}"
+    implementation 'org.postgresql:postgresql'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"

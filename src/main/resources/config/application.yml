@@ -12,13 +12,14 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher #issue with swagger & actuator
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      username: user
-      password: pass
-      database: encryption_db
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/payments
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 swagger:
   title: E2E Encryption API
