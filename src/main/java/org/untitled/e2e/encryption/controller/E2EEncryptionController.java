@@ -2,7 +2,7 @@ package org.untitled.e2e.encryption.controller;
 
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.untitled.e2e.encryption.dto.request.DecryptMessageRequest;
+import org.untitled.e2e.encryption.dto.request.DecryptWithPrivateKeyRequest;
 import org.untitled.e2e.encryption.dto.request.EncryptMessageRequest;
 import org.untitled.e2e.encryption.dto.request.InitiateCommunicationRequest;
 import org.untitled.e2e.encryption.dto.response.CryptoConversionResponse;
@@ -34,7 +34,7 @@ public class E2EEncryptionController {
 
     @PostMapping("/decrypt")
     public CryptoConversionResponse decryptMessage(
-            @RequestBody @Valid DecryptMessageRequest request) {
+            @RequestBody @Valid DecryptWithPrivateKeyRequest request) {
         return e2EEncryptionService.decryptMessage(request);
     }
 
